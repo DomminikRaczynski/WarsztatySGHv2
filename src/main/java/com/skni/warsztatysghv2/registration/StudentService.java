@@ -30,4 +30,9 @@ public class StudentService {
         System.out.println(student);
     }
 
+    public Student stringStudent() {
+        Student student = create(applicationFormService.createMock());
+        return student;
+    }
+
 }
