@@ -1,5 +1,4 @@
 package com.skni.warsztatysghv2.registration;
-//test
 public class ApplicationForm {
 
     private final String firstName;
