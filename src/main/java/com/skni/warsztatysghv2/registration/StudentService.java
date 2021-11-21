@@ -1,15 +1,20 @@
 package com.skni.warsztatysghv2.registration;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class StudentService {
 
-    private final UUIDStudentIdGenerator studentIdGenerator = new UUIDStudentIdGenerator();
-    private final StatusService statusService = new StatusService();
-    private final ApplicationFormService applicationFormService = new ApplicationFormService();
+    private final UUIDStudentIdGenerator studentIdGenerator;
+    private final StatusService statusService;
+    private final ApplicationFormService applicationFormService;
 
-    public void printStudent() {
-        Student student = create(applicationFormService.createMock());
-        System.out.println(student);
+    public StudentService(UUIDStudentIdGenerator studentIdGenerator, StatusService statusService, ApplicationFormService applicationFormService) {
+        this.studentIdGenerator = studentIdGenerator;
+        this.statusService = statusService;
+        this.applicationFormService = applicationFormService;
     }
+
 
     public Student create(ApplicationForm applicationForm) {
         String id = studentIdGenerator.getNext();
@@ -18,6 +23,11 @@ public class StudentService {
         String email = applicationForm.getEmail();
         Status status = statusService.randomStatus();
         return new Student(id, firstName, lastName, email, status); // new allowed here
+    }
+
+    public void printStudent() {
+        Student student = create(applicationFormService.createMock());
+        System.out.println(student);
     }
 
 }
